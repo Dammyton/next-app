@@ -1,11 +1,25 @@
-export default function Home() {
+'use client';
+
+import { useRouter } from 'next/navigation';
+import LoginForm from '@/components/LoginForm';
+import { useEffect } from 'react';
+
+const Home: React.FC = () => {
+  const router = useRouter();
+
+  // Handle Logged-in Users
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      router.push('/profile');
+    }
+  }, []);
+
   return (
-    <main>
-      <h1>Welcome to the Connexin Demo App!</h1>
-      <p>
-        Get started by reading&nbsp;
-        <code>README.md</code>
-      </p>
-    </main>
+    <div>
+      <LoginForm />
+    </div>
   );
-}
+};
+
+export default Home;
